@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Estoque</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .section { width: 100%; border-top: 2px dashed #ccc; padding: 20px 0; margin-top: 10px; }
+        .row { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; align-items: flex-end; }
+        .card { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 160px; }
+        input { padding: 8px; border: 1px solid #ccc; border-radius: 5px; width: 180px; }
+        button { padding: 10px 25px; border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold; text-transform: lowercase; }
+
+        .btn-add { background-color: #2ecc71; }
+        .btn-detail { background-color: #000080; }
+        .btn-remove { background-color: #ff0000; }
+        .btn-list { background-color: #000080; }
+        
+        table { width: 90%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+    <script>
+        function detalhar() {
+            let id = document.getElementById("id_detalhar").value;
+            if(id) location.href = "/produto/" + id;
+            else alert("Informe o ID");
+        }
+        function remover() {
+            let id = document.getElementById("id_remover").value;
+            if(id && confirm("Deseja realmente remover o produto " + id + "?")) 
+                location.href = "/produto/delete/" + id;
+        }
+        function listarTodos() {
+            location.href = "/produto/list/1";
+        }
+        function onLoad() {
+            let msg = document.getElementById("msg").value;
+            if(msg && msg.trim() !== "") alert(msg);
+        }
+    </script>
+</head>
+<body onload="onLoad()">
+    <h1>Controle de Estoque</h1>
+    <input type="hidden" id="msg" value="">
+
+    <UM-PRODUTO>
+
+    <div class="section">
+        <div class="row">
+            <div class="card">
+                <b>Detalhar produto</b>
+                <input type="text" id="id_detalhar" placeholder="id do produto...">
+                <button class="btn-detail" onclick="detalhar()">consultar</button>
+            </div>
+            <div class="card">
+                <b>Remover produto</b>
+                <input type="text" id="id_remover" placeholder="id do produto...">
+                <button class="btn-remove" onclick="remover()">remover</button>
+            </div>
+            <div class="card">
+                <b>Listar produtos</b>
+                <br>
+                <button class="btn-list" onclick="listarTodos()">todos</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <LISTAR-PRODUTO>
+    </div>
+</body>
+</html>
